@@ -3,6 +3,7 @@
 #include "thread.h"
 #include "interrupt.h"
 #include "console.h"
+#include "process.h"
 
 /* 临时为测试添加 */
 #include "ioqueue.h"
@@ -19,10 +20,10 @@ void main(void)
 	put_str("I am kernel\n");
 	init_all();
 
-	// thread_start("k_thread_a", 31, k_thread_a, "argA ");
-	// thread_start("k_thread_b", 31, k_thread_b, "argB ");
-	//  process_execute(u_prog_a, "user_prog_a");
-	//  process_execute(u_prog_b, "user_prog_b");
+	thread_start("k_thread_a", 31, k_thread_a, "argA ");
+	thread_start("k_thread_b", 31, k_thread_b, "argB ");
+	process_execute(u_prog_a, "user_prog_a");
+	process_execute(u_prog_b, "user_prog_b");
 
 	intr_enable();
 	while (1)
