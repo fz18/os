@@ -9,6 +9,9 @@
     "new": "c",
     "ostream": "c",
     "sstream": "c",
-    "streambuf": "c"
+    "streambuf": "c",
+    "cstdlib": "c",
+    "memory": "c",
+    "syscall.h": "c"
   }
 }

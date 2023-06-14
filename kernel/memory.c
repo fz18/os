@@ -593,7 +593,7 @@ void mfree_page(enum pool_flags pf, void *_vaddr, uint32_t pg_cnt)
 }
 
 /* 回收内存ptr */
-void *sys_free(void *ptr)
+void sys_free(void *ptr)
 {
    ASSERT(ptr != NULL);
    enum pool_flags PF;
