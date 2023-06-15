@@ -29,6 +29,7 @@ thread_ready_list   0x10              build/thread.o
 thread_all_list     0x10              build/thread.o
 user_pool           0x2c              build/memory.o
 channel_cnt         0x1               build/ide.o
+cur_part            0x4               build/fs.o
 k_block_descs       0xa8              build/memory.o
 idle_thread         0x4               build/thread.o
 intr_name           0x204             build/interrupt.o
@@ -341,7 +342,7 @@ LOAD build/fs.o
 .plt.sec
  *(.plt.sec)
 
-.text           0x00000000c0001500     0x6591
+.text           0x00000000c0001500     0x681b
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
@@ -496,8 +497,8 @@ LOAD build/fs.o
                 0x00000000c000718f                ide_init
  .text          0x00000000c00073e7       0x78 build/stdio-kernel.o
                 0x00000000c00073e7                printk
- .text          0x00000000c000745f      0x632 build/fs.o
-                0x00000000c00078d6                filesys_init
+ .text          0x00000000c000745f      0x8bc build/fs.o
+                0x00000000c0007b35                filesys_init
  *(.gnu.warning)
 
 .fini
@@ -508,7 +509,7 @@ LOAD build/fs.o
                 0x00000000c0008000                . = ALIGN (CONSTANT (MAXPAGESIZE))
                 0x00000000c0008000                . = SEGMENT_START ("rodata-segment", (ALIGN (CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 0x1))))
 
-.rodata         0x00000000c0008000     0x136d
+.rodata         0x00000000c0008000     0x138d
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata        0x00000000c0008000       0xcc build/main.o
  .rodata        0x00000000c00080cc        0xa build/init.o
@@ -536,7 +537,7 @@ LOAD build/fs.o
  *fill*         0x00000000c0008f83        0x1 
  .rodata        0x00000000c0008f84      0x215 build/ide.o
  *fill*         0x00000000c0009199        0x3 
- .rodata        0x00000000c000919c      0x1d1 build/fs.o
+ .rodata        0x00000000c000919c      0x1f1 build/fs.o
 
 .rodata1
  *(.rodata1)
@@ -545,51 +546,51 @@ LOAD build/fs.o
  *(.eh_frame_hdr)
  *(.eh_frame_entry .eh_frame_entry.*)
 
-.eh_frame       0x00000000c0009370     0x1498
+.eh_frame       0x00000000c0009390     0x14c4
  *(.eh_frame)
- .eh_frame      0x00000000c0009370       0xc4 build/main.o
- .eh_frame      0x00000000c0009434       0x24 build/init.o
+ .eh_frame      0x00000000c0009390       0xc4 build/main.o
+ .eh_frame      0x00000000c0009454       0x24 build/init.o
                                          0x50 (size before relaxing)
- .eh_frame      0x00000000c0009458      0x1b4 build/interrupt.o
+ .eh_frame      0x00000000c0009478      0x1b4 build/interrupt.o
                                         0x1e0 (size before relaxing)
- .eh_frame      0x00000000c000960c       0xf0 build/timer.o
+ .eh_frame      0x00000000c000962c       0xf0 build/timer.o
                                         0x130 (size before relaxing)
- .eh_frame      0x00000000c00096fc       0x1c build/debug.o
+ .eh_frame      0x00000000c000971c       0x1c build/debug.o
                                          0x48 (size before relaxing)
- .eh_frame      0x00000000c0009718      0x2dc build/memory.o
+ .eh_frame      0x00000000c0009738      0x2dc build/memory.o
                                         0x31c (size before relaxing)
- .eh_frame      0x00000000c00099f4       0x90 build/bitmap.o
+ .eh_frame      0x00000000c0009a14       0x90 build/bitmap.o
                                          0xbc (size before relaxing)
- .eh_frame      0x00000000c0009a84      0x168 build/string.o
+ .eh_frame      0x00000000c0009aa4      0x168 build/string.o
                                         0x194 (size before relaxing)
- .eh_frame      0x00000000c0009bec      0x1d8 build/thread.o
+ .eh_frame      0x00000000c0009c0c      0x1d8 build/thread.o
                                         0x218 (size before relaxing)
- .eh_frame      0x00000000c0009dc4      0x148 build/list.o
+ .eh_frame      0x00000000c0009de4      0x148 build/list.o
                                         0x188 (size before relaxing)
- .eh_frame      0x00000000c0009f0c       0xd8 build/console.o
+ .eh_frame      0x00000000c0009f2c       0xd8 build/console.o
                                         0x118 (size before relaxing)
- .eh_frame      0x00000000c0009fe4       0xdc build/sync.o
+ .eh_frame      0x00000000c000a004       0xdc build/sync.o
                                         0x11c (size before relaxing)
- .eh_frame      0x00000000c000a0c0       0x68 build/keyboard.o
+ .eh_frame      0x00000000c000a0e0       0x68 build/keyboard.o
                                          0xa8 (size before relaxing)
- .eh_frame      0x00000000c000a128      0x11c build/ioqueue.o
+ .eh_frame      0x00000000c000a148      0x11c build/ioqueue.o
                                         0x15c (size before relaxing)
- .eh_frame      0x00000000c000a244       0x6c build/tss.o
+ .eh_frame      0x00000000c000a264       0x6c build/tss.o
                                          0xac (size before relaxing)
- .eh_frame      0x00000000c000a2b0       0xd8 build/process.o
+ .eh_frame      0x00000000c000a2d0       0xd8 build/process.o
                                         0x118 (size before relaxing)
- .eh_frame      0x00000000c000a388       0x8c build/syscall.o
+ .eh_frame      0x00000000c000a3a8       0x8c build/syscall.o
                                          0xb8 (size before relaxing)
- .eh_frame      0x00000000c000a414       0x6c build/syscall-init.o
+ .eh_frame      0x00000000c000a434       0x6c build/syscall-init.o
                                          0xac (size before relaxing)
- .eh_frame      0x00000000c000a480       0x90 build/stdio.o
+ .eh_frame      0x00000000c000a4a0       0x90 build/stdio.o
                                          0xd0 (size before relaxing)
- .eh_frame      0x00000000c000a510      0x27c build/ide.o
+ .eh_frame      0x00000000c000a530      0x27c build/ide.o
                                         0x2bc (size before relaxing)
- .eh_frame      0x00000000c000a78c       0x28 build/stdio-kernel.o
+ .eh_frame      0x00000000c000a7ac       0x28 build/stdio-kernel.o
                                          0x54 (size before relaxing)
- .eh_frame      0x00000000c000a7b4       0x54 build/fs.o
-                                         0x80 (size before relaxing)
+ .eh_frame      0x00000000c000a7d4       0x80 build/fs.o
+                                         0xac (size before relaxing)
  *(.eh_frame.*)
 
 .gcc_except_table
@@ -713,7 +714,7 @@ LOAD build/fs.o
                 0x00000000c000c176                . = .
                 0x00000000c000c176                __bss_start = .
 
-.bss            0x00000000c000c180     0x1870
+.bss            0x00000000c000c180     0x1874
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x00000000c000c180        0x0 build/main.o
@@ -771,13 +772,15 @@ LOAD build/fs.o
                 0x00000000c000cd00                channel_cnt
                 0x00000000c000cd20                channels
                 0x00000000c000d9e0                partition_list
-                0x00000000c000d9f0                . = ALIGN ((. != 0x0)?0x4:0x1)
-                0x00000000c000d9f0                . = ALIGN (0x4)
-                0x00000000c000d9f0                . = SEGMENT_START ("ldata-segment", .)
-                0x00000000c000d9f0                . = ALIGN (0x4)
-                0x00000000c000d9f0                _end = .
+ COMMON         0x00000000c000d9f0        0x4 build/fs.o
+                0x00000000c000d9f0                cur_part
+                0x00000000c000d9f4                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x00000000c000d9f4                . = ALIGN (0x4)
+                0x00000000c000d9f4                . = SEGMENT_START ("ldata-segment", .)
+                0x00000000c000d9f4                . = ALIGN (0x4)
+                0x00000000c000d9f4                _end = .
                 [!provide]                        PROVIDE (end = .)
-                0x00000000c000d9f0                . = DATA_SEGMENT_END (.)
+                0x00000000c000d9f4                . = DATA_SEGMENT_END (.)
 
 .stab
  *(.stab)
