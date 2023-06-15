@@ -12,6 +12,7 @@
     "streambuf": "c",
     "cstdlib": "c",
     "memory": "c",
-    "syscall.h": "c"
+    "syscall.h": "c",
+    "console.h": "c"
   }
 }

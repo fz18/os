@@ -1,5 +1,6 @@
 BUILD_DIR = ./build
 DISK_IMG = hd3M.img
+DISK_IMG2 = hd80M.img
 ENTRY_POINT = 0xc0001500
 AS = nasm
 CC = gcc
@@ -17,7 +18,7 @@ OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/init.o $(BUILD_DIR)/interrupt.o \
     $(BUILD_DIR)/switch.o $(BUILD_DIR)/console.o $(BUILD_DIR)/sync.o \
 	$(BUILD_DIR)/keyboard.o $(BUILD_DIR)/ioqueue.o $(BUILD_DIR)/tss.o \
 	   $(BUILD_DIR)/process.o $(BUILD_DIR)/syscall.o $(BUILD_DIR)/syscall-init.o \
-	  $(BUILD_DIR)/stdio.o
+	  $(BUILD_DIR)/stdio.o $(BUILD_DIR)/ide.o $(BUILD_DIR)/stdio-kernel.o
 ##############     MBR代码编译     ############### 
 $(BUILD_DIR)/mbr.bin: boot/mbr.S
 	$(AS) $(ASBINLIB) $< -o $@
@@ -112,6 +113,16 @@ $(BUILD_DIR)/stdio.o: lib/stdio.c lib/stdio.h lib/stdint.h kernel/interrupt.h \
 	lib/stdint.h kernel/global.h lib/string.h lib/user/syscall.h lib/kernel/print.h
 	$(CC) $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/ide.o: device/ide.c device/ide.h lib/stdint.h thread/sync.h \
+	lib/kernel/list.h kernel/global.h thread/thread.h lib/kernel/bitmap.h \
+	kernel/memory.h lib/kernel/io.h lib/stdio.h lib/stdint.h lib/kernel/stdio-kernel.h\
+	kernel/interrupt.h kernel/debug.h device/console.h device/timer.h lib/string.h
+	$(CC) $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/stdio-kernel.o: lib/kernel/stdio-kernel.c lib/kernel/stdio-kernel.h lib/stdint.h \
+	lib/kernel/print.h lib/stdio.h lib/stdint.h device/console.h kernel/global.h
+	$(CC) $(CFLAGS) $< -o $@
+
 
 
 ##############    汇编代码编译    ###############
@@ -133,6 +144,9 @@ mk_dir:
 
 mk_img:
 	if [ ! -e $(DISK_IMG) ];then /usr/bin/bximage -hd -mode="flat" -size=3 -q $(DISK_IMG);fi
+
+disk_img:
+	if [ ! -e $(DISK_IMG2) ];then /usr/bin/bximage -hd -mode="flat" -size=80 -q $(DISK_IMG2);fi
 
 hd:
 	dd if=$(BUILD_DIR)/mbr.bin of=hd3M.img bs=512 count=1  conv=notrunc
