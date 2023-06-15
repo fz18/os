@@ -13,6 +13,7 @@
     "cstdlib": "c",
     "memory": "c",
     "syscall.h": "c",
-    "console.h": "c"
+    "console.h": "c",
+    "inode.h": "c"
   }
 }
