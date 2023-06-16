@@ -313,6 +313,9 @@ Discarded input sections
  .note.gnu.property
                 0x0000000000000000       0x1c build/assert.o
  .group         0x0000000000000000        0x8 build/buildin_cmd.o
+ .group         0x0000000000000000        0x8 build/buildin_cmd.o
+ .text.__x86.get_pc_thunk.ax
+                0x0000000000000000        0x4 build/buildin_cmd.o
  .text.__x86.get_pc_thunk.bx
                 0x0000000000000000        0x4 build/buildin_cmd.o
  .note.GNU-stack
@@ -429,7 +432,7 @@ LOAD build/buildin_cmd.o
 .plt.sec
  *(.plt.sec)
 
-.text           0x00000000c0001500     0xbf8e
+.text           0x00000000c0001500     0xc902
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
@@ -653,13 +656,21 @@ LOAD build/buildin_cmd.o
                 0x00000000c000c78c                dir_remove
  .text          0x00000000c000c870      0x5aa build/fork.o
                 0x00000000c000cccb                sys_fork
- .text          0x00000000c000ce1a      0x3d3 build/shell.o
+ .text          0x00000000c000ce1a      0x591 build/shell.o
                 0x00000000c000ce1a                print_prompt
                 0x00000000c000d093                my_shell
- .text          0x00000000c000d1ed       0x37 build/assert.o
-                0x00000000c000d1ed                user_spin
- .text          0x00000000c000d224      0x26a build/buildin_cmd.o
-                0x00000000c000d3b7                make_clear_abs_path
+ .text          0x00000000c000d3ab       0x37 build/assert.o
+                0x00000000c000d3ab                user_spin
+ .text          0x00000000c000d3e2      0xa20 build/buildin_cmd.o
+                0x00000000c000d575                make_clear_abs_path
+                0x00000000c000d64c                buildin_pwd
+                0x00000000c000d6c9                buildin_cd
+                0x00000000c000d776                buildin_ls
+                0x00000000c000db75                buildin_ps
+                0x00000000c000dbb2                buildin_clear
+                0x00000000c000dbef                buildin_mkdir
+                0x00000000c000dca0                buildin_rmdir
+                0x00000000c000dd51                buildin_rm
  *(.gnu.warning)
 
 .fini
@@ -670,7 +681,7 @@ LOAD build/buildin_cmd.o
                 0x00000000c000e000                . = ALIGN (CONSTANT (MAXPAGESIZE))
                 0x00000000c000e000                . = SEGMENT_START ("rodata-segment", (ALIGN (CONSTANT (MAXPAGESIZE)) + (. & (CONSTANT (MAXPAGESIZE) - 0x1))))
 
-.rodata         0x00000000c000e000     0x2466
+.rodata         0x00000000c000e000     0x274e
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata        0x00000000c000e000       0x51 build/main.o
  .rodata        0x00000000c000e051        0xa build/init.o
@@ -708,11 +719,11 @@ LOAD build/buildin_cmd.o
  *fill*         0x00000000c001019b        0x1 
  .rodata        0x00000000c001019c      0x145 build/fork.o
  *fill*         0x00000000c00102e1        0x3 
- .rodata        0x00000000c00102e4      0x10e build/shell.o
- *fill*         0x00000000c00103f2        0x2 
- .rodata        0x00000000c00103f4       0x32 build/assert.o
- *fill*         0x00000000c0010426        0x2 
- .rodata        0x00000000c0010428       0x3e build/buildin_cmd.o
+ .rodata        0x00000000c00102e4      0x136 build/shell.o
+ *fill*         0x00000000c001041a        0x2 
+ .rodata        0x00000000c001041c       0x32 build/assert.o
+ *fill*         0x00000000c001044e        0x2 
+ .rodata        0x00000000c0010450      0x2fe build/buildin_cmd.o
 
 .rodata1
  *(.rodata1)
@@ -721,65 +732,65 @@ LOAD build/buildin_cmd.o
  *(.eh_frame_hdr)
  *(.eh_frame_entry .eh_frame_entry.*)
 
-.eh_frame       0x00000000c0010468     0x206c
+.eh_frame       0x00000000c0010750     0x2194
  *(.eh_frame)
- .eh_frame      0x00000000c0010468       0x78 build/main.o
- .eh_frame      0x00000000c00104e0       0x24 build/init.o
+ .eh_frame      0x00000000c0010750       0x78 build/main.o
+ .eh_frame      0x00000000c00107c8       0x24 build/init.o
                                          0x50 (size before relaxing)
- .eh_frame      0x00000000c0010504      0x1b4 build/interrupt.o
+ .eh_frame      0x00000000c00107ec      0x1b4 build/interrupt.o
                                         0x1e0 (size before relaxing)
- .eh_frame      0x00000000c00106b8       0xf0 build/timer.o
+ .eh_frame      0x00000000c00109a0       0xf0 build/timer.o
                                         0x130 (size before relaxing)
- .eh_frame      0x00000000c00107a8       0x1c build/debug.o
+ .eh_frame      0x00000000c0010a90       0x1c build/debug.o
                                          0x48 (size before relaxing)
- .eh_frame      0x00000000c00107c4      0x300 build/memory.o
+ .eh_frame      0x00000000c0010aac      0x300 build/memory.o
                                         0x340 (size before relaxing)
- .eh_frame      0x00000000c0010ac4       0x90 build/bitmap.o
+ .eh_frame      0x00000000c0010dac       0x90 build/bitmap.o
                                          0xbc (size before relaxing)
- .eh_frame      0x00000000c0010b54      0x168 build/string.o
+ .eh_frame      0x00000000c0010e3c      0x168 build/string.o
                                         0x194 (size before relaxing)
- .eh_frame      0x00000000c0010cbc      0x264 build/thread.o
+ .eh_frame      0x00000000c0010fa4      0x264 build/thread.o
                                         0x2a4 (size before relaxing)
- .eh_frame      0x00000000c0010f20      0x148 build/list.o
+ .eh_frame      0x00000000c0011208      0x148 build/list.o
                                         0x188 (size before relaxing)
- .eh_frame      0x00000000c0011068       0xd8 build/console.o
+ .eh_frame      0x00000000c0011350       0xd8 build/console.o
                                         0x118 (size before relaxing)
- .eh_frame      0x00000000c0011140       0xdc build/sync.o
+ .eh_frame      0x00000000c0011428       0xdc build/sync.o
                                         0x11c (size before relaxing)
- .eh_frame      0x00000000c001121c       0x68 build/keyboard.o
+ .eh_frame      0x00000000c0011504       0x68 build/keyboard.o
                                          0xa8 (size before relaxing)
- .eh_frame      0x00000000c0011284      0x11c build/ioqueue.o
+ .eh_frame      0x00000000c001156c      0x11c build/ioqueue.o
                                         0x15c (size before relaxing)
- .eh_frame      0x00000000c00113a0       0x6c build/tss.o
+ .eh_frame      0x00000000c0011688       0x6c build/tss.o
                                          0xac (size before relaxing)
- .eh_frame      0x00000000c001140c       0xd8 build/process.o
+ .eh_frame      0x00000000c00116f4       0xd8 build/process.o
                                         0x118 (size before relaxing)
- .eh_frame      0x00000000c00114e4      0x308 build/syscall.o
+ .eh_frame      0x00000000c00117cc      0x308 build/syscall.o
                                         0x334 (size before relaxing)
- .eh_frame      0x00000000c00117ec       0x48 build/syscall-init.o
+ .eh_frame      0x00000000c0011ad4       0x48 build/syscall-init.o
                                          0x88 (size before relaxing)
- .eh_frame      0x00000000c0011834       0x90 build/stdio.o
+ .eh_frame      0x00000000c0011b1c       0x90 build/stdio.o
                                          0xd0 (size before relaxing)
- .eh_frame      0x00000000c00118c4      0x27c build/ide.o
+ .eh_frame      0x00000000c0011bac      0x27c build/ide.o
                                         0x2bc (size before relaxing)
- .eh_frame      0x00000000c0011b40       0x28 build/stdio-kernel.o
+ .eh_frame      0x00000000c0011e28       0x28 build/stdio-kernel.o
                                          0x54 (size before relaxing)
- .eh_frame      0x00000000c0011b68      0x3b0 build/fs.o
+ .eh_frame      0x00000000c0011e50      0x3b0 build/fs.o
                                         0x3f0 (size before relaxing)
- .eh_frame      0x00000000c0011f18      0x100 build/inode.o
+ .eh_frame      0x00000000c0012200      0x100 build/inode.o
                                         0x140 (size before relaxing)
- .eh_frame      0x00000000c0012018      0x178 build/file.o
+ .eh_frame      0x00000000c0012300      0x178 build/file.o
                                         0x1cc (size before relaxing)
- .eh_frame      0x00000000c0012190      0x17c build/dir.o
+ .eh_frame      0x00000000c0012478      0x17c build/dir.o
                                         0x1bc (size before relaxing)
- .eh_frame      0x00000000c001230c       0xd4 build/fork.o
+ .eh_frame      0x00000000c00125f4       0xd4 build/fork.o
                                         0x114 (size before relaxing)
- .eh_frame      0x00000000c00123e0       0x8c build/shell.o
-                                         0xcc (size before relaxing)
- .eh_frame      0x00000000c001246c       0x1c build/assert.o
+ .eh_frame      0x00000000c00126c8       0x88 build/shell.o
+                                         0xc8 (size before relaxing)
+ .eh_frame      0x00000000c0012750       0x1c build/assert.o
                                          0x48 (size before relaxing)
- .eh_frame      0x00000000c0012488       0x4c build/buildin_cmd.o
-                                         0x78 (size before relaxing)
+ .eh_frame      0x00000000c001276c      0x178 build/buildin_cmd.o
+                                        0x1b8 (size before relaxing)
  *(.eh_frame.*)
 
 .gcc_except_table
