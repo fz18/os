@@ -103,6 +103,7 @@ struct task_struct
    struct mem_block_desc u_block_desc[DESC_CNT]; // 用户进程内存块描述符
    int32_t fd_table[MAX_FILES_OPEN_PER_PROC];    // 文件描述符数组
    uint32_t cwd_inode_nr;                        // 进程所在的工作目录的inode编号
+   int16_t parent_pid;                           // 父进程pid
 };
 
 extern struct list thread_ready_list;
@@ -117,4 +118,5 @@ void thread_init(void);
 void thread_block(enum task_status stat);
 void thread_unblock(struct task_struct *pthread);
 void thread_yield(void);
+pid_t fork_pid(void);
 #endif
