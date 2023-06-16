@@ -15,6 +15,9 @@
     "syscall.h": "c",
     "console.h": "c",
     "inode.h": "c",
-    "assert.h": "c"
+    "assert.h": "c",
+    "unordered_map": "c",
+    "istream": "c",
+    "numeric": "c"
   }
 }
