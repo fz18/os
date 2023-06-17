@@ -26,7 +26,7 @@ int main(void)
    // struct disk *sda = &channels[0].devices[0];
    // void *prog_buf = sys_malloc(file_size);
    // ide_read(sda, 300, prog_buf, sec_cnt);
-   // int32_t fd = sys_open("/prog_no_arg2", O_CREAT | O_RDWR);
+   // int32_t fd = sys_open("/prog_no_arg", O_CREAT | O_RDWR);
    // if (fd != -1)
    //{
    //    if (sys_write(fd, prog_buf, file_size) == -1)

@@ -1,5 +1,5 @@
 BUILD_DIR = ./build
-DISK_IMG = hd3M.img
+DISK_IMG = hd60M.img
 DISK_IMG2 = hd80M.img
 ENTRY_POINT = 0xc0001500
 AS = nasm
@@ -192,16 +192,16 @@ mk_dir:
 	if [ ! -d $(BUILD_DIR) ];then mkdir $(BUILD_DIR);fi
 
 mk_img:
-	if [ ! -e $(DISK_IMG) ];then /usr/bin/bximage -hd -mode="flat" -size=3 -q $(DISK_IMG);fi
+	if [ ! -e $(DISK_IMG) ];then /usr/bin/bximage -hd -mode="flat" -size=60 -q $(DISK_IMG);fi
 
 disk_img:
 	if [ ! -e $(DISK_IMG2) ];then /usr/bin/bximage -hd -mode="flat" -size=80 -q $(DISK_IMG2);fi
 
 hd:
-	dd if=$(BUILD_DIR)/mbr.bin of=hd3M.img bs=512 count=1  conv=notrunc
-	dd if=$(BUILD_DIR)/loader.bin of=hd3M.img bs=512 count=4 seek=2 conv=notrunc
+	dd if=$(BUILD_DIR)/mbr.bin of=hd60M.img bs=512 count=1  conv=notrunc
+	dd if=$(BUILD_DIR)/loader.bin of=hd60M.img bs=512 count=4 seek=2 conv=notrunc
 	dd if=$(BUILD_DIR)/kernel.bin \
-           of=hd3M.img \
+           of=hd60M.img \
            bs=512 count=200 seek=9 conv=notrunc
 clean:
 	cd $(BUILD_DIR) && rm -rf ./* && rm ../$(DISK_IMG)

@@ -177,7 +177,6 @@ int32_t sys_execv(const char *path, const char *argv[])
    int32_t entry_point = load(path);
    if (entry_point == -1)
    { // 若加载失败则返回-1
-      printk("load failed");
       return -1;
    }
 

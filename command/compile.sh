@@ -12,13 +12,13 @@ if [[ ! -d "../lib" || ! -d "../build" ]];then
 fi
 
 BIN="prog_no_arg"
-CFLAGS="-m32 -Wall -c -fno-builtin -W -Wstrict-prototypes \
+CFLAGS="-Wall -c -fno-builtin -W -Wstrict-prototypes \
       -Wmissing-prototypes -Wsystem-headers"
 LIB="../lib/"
 OBJS="../build/string.o ../build/syscall.o \
       ../build/stdio.o ../build/assert.o"
 DD_IN=$BIN
-DD_OUT="/home/work/my_workspace/bochs/hd60M.img" 
+DD_OUT="/home/fz/OS/my/hd60M.img" 
 
 gcc $CFLAGS -I $LIB -o $BIN".o" $BIN".c"
 ld -e main $BIN".o" $OBJS -o $BIN
@@ -28,7 +28,6 @@ if [[ -f $BIN ]];then
    dd if=./$DD_IN of=$DD_OUT bs=512 \
    count=$SEC_CNT seek=300 conv=notrunc
 fi
-
 ##########   以上核心就是下面这三条命令   ##########
 #gcc -Wall -c -fno-builtin -W -Wstrict-prototypes -Wmissing-prototypes \
 #   -Wsystem-headers -I ../lib -o prog_no_arg.o prog_no_arg.c

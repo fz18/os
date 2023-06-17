@@ -19,7 +19,7 @@ DD_IN=$BIN
 DD_OUT="/home/fz/OS/my/hd80M.img" 
 
 gcc $CFLAGS -I $LIB -o $BIN".o" $BIN".c"
-ld -melf_i386 -e main $BIN".o" $OBJS -o $BIN
+ld -m elf_i386 -e main $BIN".o" $OBJS -o $BIN
 SEC_CNT=$(ls -l $BIN|awk '{printf("%d", ($5+511)/512)}')
 
 if [[ -f $BIN ]];then
