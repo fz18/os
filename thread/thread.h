@@ -105,6 +105,7 @@ struct task_struct
    int32_t fd_table[MAX_FILES_OPEN_PER_PROC];    // 文件描述符数组
    uint32_t cwd_inode_nr;                        // 进程所在的工作目录的inode编号
    int16_t parent_pid;                           // 父进程pid
+   int8_t exit_status;                           // 进程结束时自己调用exit传入的参数
 };
 
 extern struct list thread_ready_list;
@@ -121,4 +122,7 @@ void thread_unblock(struct task_struct *pthread);
 void thread_yield(void);
 pid_t fork_pid(void);
 void sys_ps(void);
+void thread_exit(struct task_struct *thread_over, bool need_schedule);
+struct task_struct *pid2thread(int32_t pid);
+void release_pid(pid_t pid);
 #endif
