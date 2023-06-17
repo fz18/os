@@ -40,8 +40,7 @@ int main(void)
 
    cls_screen();
    console_put_str("[rabbit@localhost /]$ ");
-   while (1)
-      ;
+   thread_exit(running_thread(), true);
    return 0;
 }
 

@@ -187,6 +187,10 @@ void my_shell(void)
 		{
 			buildin_rm(argc, argv);
 		}
+		else if (!strcmp("help", argv[0]))
+		{
+			buildin_help(argc, argv);
+		}
 		else
 		{ // 如果是外部命令,需要从磁盘上加载
 			int32_t pid = fork();
